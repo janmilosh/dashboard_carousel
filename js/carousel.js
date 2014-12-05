@@ -1,4 +1,5 @@
 $(function() {
+  var indexer, adder;
   var height = $(window).height();
   var iframe = $('iframe');
   var wrapper = $('#wrapper');
@@ -12,35 +13,30 @@ $(function() {
   left.css('height', height);
   right.css('height', height);
 
-  iframe.attr('src', urls[index]);
-
-  var indexCarousel = function() {
-    if (index === (urls.length - 1)) {
-      index = 0;
-    } else {
-      index++
+  var indexCarousel = function(adder) {
+    if (!adder) {
+      adder = 0;
     }
+    console.log('index', index);
+    console.log('adder', adder);
     iframe.attr('src', urls[index])
-    setTimeout(indexCarousel, carouselPauseTime);
+    indexer = setTimeout(indexCarousel, carouselPauseTime);
+    if (index === (urls.length - 1)) {
+      index = 0 + adder;
+    } else {
+      index = index + 1 + adder;
+    }
   };
   indexCarousel();
 
   left.on('click', function() {
-    if (index === 0) {
-      index = urls.length - 1;
-    } else {
-      index--
-    }
-    iframe.attr('src', urls[index])
+    clearTimeout(indexer)
+    indexCarousel(-1);
   });
 
   right.on('click', function() {
-    if (index === (urls.length - 1)) {
-      index = 0;
-    } else {
-      index++
-    }
-    iframe.attr('src', urls[index])
+    clearTimeout(indexer)
+    indexCarousel(1);
   });
 
 });
