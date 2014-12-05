@@ -4,3 +4,5 @@ var urls =
     'http://covermymeds.com',
     'http://machinedesignohio.com'
   ]
+
+var carouselPauseTime = 60000;

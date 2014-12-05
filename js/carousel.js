@@ -12,8 +12,18 @@ $(function() {
   left.css('height', height);
   right.css('height', height);
 
-  
   iframe.attr('src', urls[index]);
+
+  var indexCarousel = function() {
+    if (index === (urls.length - 1)) {
+      index = 0;
+    } else {
+      index++
+    }
+    iframe.attr('src', urls[index])
+    setTimeout(indexCarousel, carouselPauseTime);
+  };
+  indexCarousel();
 
   left.on('click', function() {
     if (index === 0) {
