@@ -1,42 +1,65 @@
 $(function() {
-  var indexer, adder;
-  var height = $(window).height();
+
+  var footerHeight = 40;
+
+  var indexer, direction;
+  var height = $(window).height() - footerHeight;
+  var footer = $('#footer');
   var iframe = $('iframe');
   var wrapper = $('#wrapper');
-  var left = $('#left');
-  var right = $('#right');
-  var index = 0;
+  var back = $('#back');
+  var next = $('#next');
+  var pause = $('#pause');
+  var reStart = $('#continue');
+  var index = -1;
   var numberOfUrls = urls.length;
 
+  footer.css('height', footerHeight);
   wrapper.css('height', height);
   iframe.css('height', height);
-  left.css('height', height);
-  right.css('height', height);
 
-  var indexCarousel = function(adder) {
-    if (!adder) {
-      adder = 0;
+  var indexCarousel = function(direction) {
+    if (!direction) {
+      direction = false;
     }
-    console.log('index', index);
-    console.log('adder', adder);
-    iframe.attr('src', urls[index])
-    indexer = setTimeout(indexCarousel, carouselPauseTime);
-    if (index === (urls.length - 1)) {
-      index = 0 + adder;
+    
+    if (index === urls.length - 1 && direction !== 'back') {
+      index = 0;
+    } else if (index === 0 && direction === 'back'){
+      index = urls.length - 1;
+    } else if (index > 0 && direction === 'back'){
+      index -= 1;
     } else {
-      index = index + 1 + adder;
+      index++;
     }
-  };
-  indexCarousel();
 
-  left.on('click', function() {
-    clearTimeout(indexer)
-    indexCarousel(-1);
+    iframe.attr('src', urls[index]);
+    indexer = setTimeout(indexCarousel, carouselPauseTime);
+  };
+
+  indexCarousel(); //This starts the carousel
+
+  back.on('click', function() {
+    clearTimeout(indexer);
+    pause.css('background', 'black');
+    indexCarousel('back');
   });
 
-  right.on('click', function() {
-    clearTimeout(indexer)
-    indexCarousel(1);
+  next.on('click', function() {
+    clearTimeout(indexer);
+    pause.css('background', 'black');
+    indexCarousel();
+  });
+
+  pause.on('click', function() {
+    clearTimeout(indexer);
+    pause.css('background', '#CD0000');
+  });
+
+  reStart.on('click', function() {
+    clearTimeout(indexer);
+    pause.css('background', 'black');
+    indexCarousel();
   });
 
 });

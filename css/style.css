@@ -36,25 +36,37 @@ iframe {
   z-index: 1;
 }
 
-#left, #right {
-  width: 10%;
-  height: 600px;
-  position: fixed;
+#controls {
+  height: 40px;
+  background: black;
+}
+
+button {
+  color: white;
+  background: black;
   cursor: pointer;
-  z-index: 1;
+  font-size: 20px;
+  height: 40px;
+  width: 150px;
+  border: none;
+  border-right: 1px solid #444;
 }
 
-#left:hover, #right:hover {
-  background: rgba(150,150,150,0.1);
+button:hover {
+  background: #222;
 }
 
-#left {
-  left: 0;
-  top: 0;
+button:active {
+  background: #333;
 }
 
-#right {
-  right: 0;
-  top: 0;
+button:focus {
+  outline: none;
 }
 
+#back,
+#next,
+#pause,
+#continue {
+  float: left;
+}

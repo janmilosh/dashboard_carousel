@@ -1,9 +1,10 @@
 var urls =
   [
     'http://janmilosh.com',
-    'http://covermymeds.com',
+    'http://janmilosh.github.io/weather-graph',
     'http://machinedesignohio.com',
+    'http://janmilosh.github.io/adjuster-map',
     'http://cbusjs.github.io'
   ]
 
-var carouselPauseTime = 6000;
+var carouselPauseTime = 10000;
