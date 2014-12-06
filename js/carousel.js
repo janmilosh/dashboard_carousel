@@ -47,7 +47,7 @@ $(function() {
 
   next.on('click', function() {
     clearTimeout(indexer);
-    pause.css('background', 'black');
+    pause.css('background', '');
     indexCarousel();
   });
 
@@ -58,7 +58,7 @@ $(function() {
 
   reStart.on('click', function() {
     clearTimeout(indexer);
-    pause.css('background', 'black');
+    pause.css('background', '');
     indexCarousel();
   });
 
